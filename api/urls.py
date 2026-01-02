@@ -11,4 +11,7 @@ urlpatterns=[
       path('workers/',views.Workers.as_view()),
       path('workers/<int:pk>/',views.WorkerDetail.as_view()),
 
+      path('bots/',views.Bots.as_view()),
+      path('bots/<int:pk>/',views.BotDetail.as_view()),
+
 ] 

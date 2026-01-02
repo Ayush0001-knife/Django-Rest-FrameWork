@@ -120,5 +120,11 @@ class WorkerDetail(mixins.DestroyModelMixin,mixins.RetrieveModelMixin,mixins.Upd
       def delete(self,request,pk):
             return self.destroy(request,pk)
       
-        
+
+class Bots():
+      pass
+
+class BotDetail():
+      pass
+
             
