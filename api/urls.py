@@ -6,4 +6,5 @@ urlpatterns=[
       path('students/<int:id>/',views.studentDetailView),
 
       path('employees/',views.Employees.as_view()),
+      path('employees/<int:id>/',views.EmployeeDetail.as_view()),
 ] 
