@@ -107,6 +107,18 @@ class Workers(mixins.ListModelMixin,mixins.CreateModelMixin,generics.GenericAPIV
             return self.create(request)
 
 class WorkerDetail(mixins.DestroyModelMixin,mixins.RetrieveModelMixin,mixins.UpdateModelMixin,generics.GenericAPIView):
-      pass
 
+      queryset=Worker.objects.all()
+      serializer_class = WorkerSerializer   
+
+      def get(self,request,pk):
+            return self.retrieve(request,pk)
+      
+      def put(self,request,pk):
+            return self.update(request,pk)
+      
+      def delete(self,request,pk):
+            return self.destroy(request,pk)
+      
+        
             
