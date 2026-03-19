@@ -4,12 +4,17 @@ from students.models import Student
 from .serializers import StudentSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import status
+from rest_framework import status,mixins,generics
 from rest_framework.views import APIView
 from employee.models import Employee
 from .serializers import EmployeeSerializer
+from workers.models import Worker
+from .serializers import WorkerSerializer
 
-# Create your views here. 
+
+
+
+
 @api_view(['GET','POST'])
 def studentView(request):
       if(request.method == "GET"):
@@ -46,7 +51,7 @@ def studentDetailView(request, id):
       elif request.method == 'DELETE':
             student.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
-      
+
 
 
 class Employees(APIView):
@@ -62,7 +67,6 @@ class Employees(APIView):
                 serializer.save()
                 return Response(serializer.data,status=status.HTTP_201_CREATED)
             return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
-
 
 class EmployeeDetail(APIView):
       def get_object(self, id):
@@ -88,8 +92,19 @@ class EmployeeDetail(APIView):
             employee = self.get_object(id)
             employee.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
-      
 
+
+
+class Workers(mixins.ListModelMixin,mixins.CreateModelMixin,generics.GenericAPIView):
+      
+      queryset=Worker.objects.all()
+      serializer_class=WorkerSerializer()
+
+      def get(self,request):
+            return self.list(request)
+      
+      def post(self,request):
+            return self.create(request)
 
 
             
