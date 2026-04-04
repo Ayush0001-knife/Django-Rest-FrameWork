@@ -98,13 +98,15 @@ class EmployeeDetail(APIView):
 class Workers(mixins.ListModelMixin,mixins.CreateModelMixin,generics.GenericAPIView):
       
       queryset=Worker.objects.all()
-      serializer_class=WorkerSerializer()
-
+      serializer_class = WorkerSerializer   
+      
       def get(self,request):
             return self.list(request)
       
       def post(self,request):
             return self.create(request)
 
+class WorkerDetail(mixins.DestroyModelMixin,mixins.RetrieveModelMixin,mixins.UpdateModelMixin,generics.GenericAPIView):
+      pass
 
             
