@@ -9,12 +9,14 @@ from rest_framework.views import APIView
 from employee.models import Employee
 from .serializers import EmployeeSerializer
 from workers.models import Worker
+from bot.models import Bot
 from .serializers import WorkerSerializer
+from .serializers import BotSerializer
 
 
 
 
-
+# Function Based View
 @api_view(['GET','POST'])
 def studentView(request):
       if(request.method == "GET"):
@@ -28,7 +30,7 @@ def studentView(request):
                   return Response(serializer.data,status=status.HTTP_201_CREATED)
             return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
       
-
+# Function Based View
 @api_view(['GET','PUT','DELETE'])
 def studentDetailView(request, id):
       try:
@@ -54,6 +56,7 @@ def studentDetailView(request, id):
 
 
 
+# Class Based View
 class Employees(APIView):
       def get(self,request):
             employees = Employee.objects.all()
@@ -68,6 +71,7 @@ class Employees(APIView):
                 return Response(serializer.data,status=status.HTTP_201_CREATED)
             return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
+# Class Based View
 class EmployeeDetail(APIView):
       def get_object(self, id):
             try:
@@ -94,7 +98,7 @@ class EmployeeDetail(APIView):
             return Response(status=status.HTTP_204_NO_CONTENT)
 
 
-
+# Mix Based View
 class Workers(mixins.ListModelMixin,mixins.CreateModelMixin,generics.GenericAPIView):
       
       queryset=Worker.objects.all()
@@ -106,6 +110,8 @@ class Workers(mixins.ListModelMixin,mixins.CreateModelMixin,generics.GenericAPIV
       def post(self,request):
             return self.create(request)
 
+
+# Mixins Based View
 class WorkerDetail(mixins.DestroyModelMixin,mixins.RetrieveModelMixin,mixins.UpdateModelMixin,generics.GenericAPIView):
 
       queryset=Worker.objects.all()
@@ -121,10 +127,15 @@ class WorkerDetail(mixins.DestroyModelMixin,mixins.RetrieveModelMixin,mixins.Upd
             return self.destroy(request,pk)
       
 
-class Bots():
-      pass
+# Generic Based View
+class Bots(generics.ListCreateAPIView):   # ListAPIView for listing all bots, CreateAPIView for creating a new bot and we can use only one Api View to do both of their functionality which is ListCreateAPIView
+      queryset=Bot.objects.all()
+      serializer_class = BotSerializer  
 
-class BotDetail():
-      pass
+# Generic Based View
+class BotDetail(generics.RetrieveAPIView,generics.DestroyAPIView,generics.UpdateAPIView):
+      queryset=Bot.objects.all()
+      serializer_class = BotSerializer  
+      lookup_field='pk'    # To search the data by primary key
 
             
