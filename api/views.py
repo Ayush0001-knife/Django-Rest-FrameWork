@@ -4,7 +4,7 @@ from students.models import Student
 from .serializers import StudentSerializer
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
-from rest_framework import status,mixins,generics
+from rest_framework import status,mixins,generics,viewsets
 from rest_framework.views import APIView
 from employee.models import Employee
 from .serializers import EmployeeSerializer
@@ -12,6 +12,8 @@ from workers.models import Worker
 from bot.models import Bot
 from .serializers import WorkerSerializer
 from .serializers import BotSerializer
+from agents.models import Agent
+from .serializers import AgentSerializer
 
 
 
@@ -138,4 +140,22 @@ class BotDetail(generics.RetrieveAPIView,generics.DestroyAPIView,generics.Update
       serializer_class = BotSerializer  
       lookup_field='pk'    # To search the data by primary key
 
-            
+
+# Viewset Based using ----- >    viewsets.ViewSet
+class AgentViewSet(viewsets.ViewSet):
+      
+      def list(self,request):
+            queryset=Agent.objects.all()
+            serializer=AgentSerializer(queryset,many=True)
+            return Response(serializer.data,status=status.HTTP_200_OK)
+
+      def create(self,request):
+            serializer=AgentSerializer(data=request.data)
+            if(serializer.is_valid()):
+                  serializer.save()
+                  return Response(serializer.data,status=status.HTTP_201_CREATED)
+            return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
+
+
+ 
+

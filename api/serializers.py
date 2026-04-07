@@ -3,6 +3,7 @@ from students.models import Student
 from employee.models import Employee
 from workers.models import Worker
 from bot.models import Bot
+from agents.models import Agent
 
 
 
@@ -24,4 +25,9 @@ class WorkerSerializer(serializers.ModelSerializer):
 class BotSerializer(serializers.ModelSerializer):
       class Meta:
             model = Bot
+            fields = '__all__'
+
+class AgentSerializer(serializers.ModelSerializer):
+      class Meta:
+            model = Agent
             fields = '__all__'

@@ -1,5 +1,14 @@
 from django.urls import path
 from . import views
+from rest_framework.routers import DefaultRouter
+from django.urls import include
+
+
+
+router = DefaultRouter()
+router.register('agents',views.AgentViewSet,basename='agent')
+
+
 
 urlpatterns=[
       path('students/',views.studentView),
@@ -14,4 +23,6 @@ urlpatterns=[
       path('bots/',views.Bots.as_view()),
       path('bots/<int:pk>/',views.BotDetail.as_view()),
 
+      # For viewsets
+      path('',include(router.urls)),
 ] 
