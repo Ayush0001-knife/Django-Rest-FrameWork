@@ -156,6 +156,7 @@ class AgentViewSet(viewsets.ViewSet):
                   return Response(serializer.data,status=status.HTTP_201_CREATED)
             return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
+
       def retrieve(self,request,pk=None):
            agent = get_object_or_404(Agent,pk=pk)
            serializer=AgentSerializer(agent)
