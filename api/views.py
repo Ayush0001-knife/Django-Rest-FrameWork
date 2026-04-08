@@ -170,5 +170,9 @@ class AgentViewSet(viewsets.ViewSet):
                   return Response(serializer.data,status=status.HTTP_200_OK)
             return Response(serializer.errors,status=status.HTTP_400_BAD_REQUEST)
 
+      def delete(self,request,pk=None):
+            agent=get_object_or_404(Agent,pk=pk)
+            agent.delete()
+            return Response(status=status.HTTP_204_NO_CONTENT)
 
 
