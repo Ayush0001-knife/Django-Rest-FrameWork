@@ -174,5 +174,6 @@ class AgentViewSet(viewsets.ViewSet):
             agent=get_object_or_404(Agent,pk=pk)
             agent.delete()
             return Response(status=status.HTTP_204_NO_CONTENT)
+            
 
 
