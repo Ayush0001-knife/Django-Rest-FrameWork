@@ -25,4 +25,9 @@ urlpatterns=[
 
       # For viewsets
       path('',include(router.urls)),
+
+      path('blogs/',views.Blogs.as_view()),
+      # path('blogs/<int:pk>/',include.BlogsDetail.as_view()),
+      path('comments/',views.Comments.as_view()),
+      # path('comments/<int:pk>/',include.CommentsDetail.as_view()),
 ] 

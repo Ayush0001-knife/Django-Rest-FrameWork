@@ -14,6 +14,8 @@ from .serializers import WorkerSerializer
 from .serializers import BotSerializer
 from agents.models import Agent
 from .serializers import AgentSerializer
+from blogs.models import Blog,Comment
+from blogs.serialzers import BlogSerializer,CommentSerializer
 
 
 
@@ -181,3 +183,11 @@ class AgentViewSet(viewsets.ModelViewSet):
       queryset=Agent.objects.all()
       serializer_class = AgentSerializer  
 
+class Blogs(generics.ListCreateAPIView):
+      queryset=Blog.objects.all()
+      serializer_class = BlogSerializer  
+
+class Comments(generics.ListCreateAPIView):
+      queryset=Comment.objects.all()
+      serializer_class = CommentSerializer  
+     
