@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'workers',
     'bot',
     'agents',
+    'blogs',
 ]
 
 MIDDLEWARE = [

@@ -31,3 +31,4 @@ class AgentSerializer(serializers.ModelSerializer):
       class Meta:
             model = Agent
             fields = '__all__'
+
