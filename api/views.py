@@ -16,6 +16,7 @@ from agents.models import Agent
 from .serializers import AgentSerializer
 from blogs.models import Blog,Comment
 from blogs.serialzers import BlogSerializer,CommentSerializer
+from .paginations import CustomPagination
 
 
 
@@ -182,6 +183,7 @@ class BotDetail(generics.RetrieveAPIView,generics.DestroyAPIView,generics.Update
 class AgentViewSet(viewsets.ModelViewSet):
       queryset=Agent.objects.all()
       serializer_class = AgentSerializer  
+      pagination_class=CustomPagination
 
 class Blogs(generics.ListCreateAPIView):
       queryset=Blog.objects.all()
