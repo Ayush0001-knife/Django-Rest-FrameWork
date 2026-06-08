@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'bot',
     'agents',
     'blogs',
+    'django_filters',
 ]
 
 MIDDLEWARE = [
@@ -133,4 +134,5 @@ REST_FRAMEWORK={
     # 'DEFAULT_PAGINATION_CLASS':'rest_framework.pagination.PageNumberPagination',       # This is for thr Page Number Pagination
     'DEFAULT_PAGINATION_CLASS':'rest_framework.pagination.LimitOffsetPagination',       # This is for Limit Offset Pagination
     'PAGE_SIZE':2,
+    'DEFAULT_FILTER_BACKENDS':['django_filters.rest_framework.DjangoFilterBackend'],
 }

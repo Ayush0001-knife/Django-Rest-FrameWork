@@ -184,6 +184,7 @@ class AgentViewSet(viewsets.ModelViewSet):
       queryset=Agent.objects.all()
       serializer_class = AgentSerializer  
       pagination_class=CustomPagination
+      filterset_fields=['designation']
 
 class Blogs(generics.ListCreateAPIView):
       queryset=Blog.objects.all()
