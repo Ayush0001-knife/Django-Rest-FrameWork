@@ -17,7 +17,7 @@ from .serializers import AgentSerializer
 from blogs.models import Blog,Comment
 from blogs.serialzers import BlogSerializer,CommentSerializer
 from .paginations import CustomPagination
-
+from agents.filters import AgentFilter
 
 
 
@@ -184,7 +184,9 @@ class AgentViewSet(viewsets.ModelViewSet):
       queryset=Agent.objects.all()
       serializer_class = AgentSerializer  
       pagination_class=CustomPagination
-      filterset_fields=['designation']
+      filterset_class=AgentFilter
+
+
 
 class Blogs(generics.ListCreateAPIView):
       queryset=Blog.objects.all()
