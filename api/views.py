@@ -18,7 +18,7 @@ from blogs.models import Blog,Comment
 from blogs.serialzers import BlogSerializer,CommentSerializer
 from .paginations import CustomPagination
 from agents.filters import AgentFilter
-
+from rest_framework.filters import SearchFilter,OrderingFilter
 
 
 # Function Based View
@@ -191,6 +191,9 @@ class AgentViewSet(viewsets.ModelViewSet):
 class Blogs(generics.ListCreateAPIView):
       queryset=Blog.objects.all()
       serializer_class = BlogSerializer  
+      filter_backends=[SearchFilter,OrderingFilter]
+      search_fields=['blog_title','blog_body']
+      ordering_fields=['id','blog_title']
 
 class Comments(generics.ListCreateAPIView):
       queryset=Comment.objects.all()
@@ -199,7 +202,8 @@ class Comments(generics.ListCreateAPIView):
 class BlogsDetail(generics.RetrieveUpdateDestroyAPIView):
       queryset=Blog.objects.all()
       serializer_class = BlogSerializer
-      lookup_field='pk'    
+      lookup_field='pk'   
+      
 
 class CommentsDetail(generics.RetrieveUpdateDestroyAPIView):
       queryset=Comment.objects.all()
